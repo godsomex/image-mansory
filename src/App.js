@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+
+import { initState } from "./data";
 
 function App() {
+  const [imgs] = useState(initState);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      {imgs.data.map((img, i) => (
+        <>
+          <article>
+            {img.images && <img loading="lazy" src={img.images[0].link} />}
+            <h3>{img.title}</h3>
+            <p>{img.images && img.images[0].description}</p>
+          </article>
+        </>
+      ))}
+    </main>
   );
 }
 
