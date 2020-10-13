@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-function Details(props) {
+function Details() {
   const history = useHistory();
   const { link, description } = history.location.state.images[0];
   const { title, ups, downs, score } = history.location.state;
