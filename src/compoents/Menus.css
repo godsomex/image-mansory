@@ -14,7 +14,7 @@
     margin: 0 0 15px 0;
   }
   .control.layout {
-    margin: 0;
+    margin: 0 0 15px 0;
   }
 }
 .control-icon {
@@ -158,11 +158,6 @@ select.form-control::-ms-expand {
   border-color: #4a9ff9;
 }
 
-section {
-  padding-top: 0;
-  max-width: 940px;
-  text-align: left;
-}
 section.demo {
   margin-top: 30px;
 }
@@ -179,6 +174,7 @@ section h4 {
 }
 
 .section-title {
+  cursor: pointer;
   color: #3e3e3e;
   font-size: 26px;
   font-weight: 700;
