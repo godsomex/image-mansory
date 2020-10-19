@@ -1,29 +1,45 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import styled from "@emotion/styled";
+import styled from "@emotion/styled/macro";
 
 function Details() {
   const history = useHistory();
-  const { link, description } = history.location.state.images[0];
-  const { title, ups, downs, score } = history.location.state;
+  const { state } = history.location;
 
+  console.log(state);
   return (
     <Wrapper>
-      <Container className="container">
+      <Container>
         <div className="imgBx">
-          <img src={link} alt={title} />
+          {state && state.images && state.images[0].type === "video/mp4" ? (
+            <video autoPlay>
+              <source src={state && state.images && state.images[0].mp4} />
+            </video>
+          ) : (
+            <img
+              src={
+                (state && state.images && state.images[0].link) ||
+                (state && state.link)
+              }
+              alt="img"
+            />
+          )}
         </div>
         <div className="details">
           <div className="content">
             <h2>
-              {title} <br />
+              {state.title} <br />
             </h2>
-            <p>{description}</p>
             <p>
-              <span>{ups} ups </span>
-              <span>{downs} downs</span>
+              {state.description ||
+                (state.images && state.images[0].description)}
             </p>
-            <Button>{score} score</Button>
+            <p>
+              {state.ups} ups <span>{state.downs} downs</span>{" "}
+            </p>
+            <p>
+              <Button>{state.score} score</Button>
+            </p>
           </div>
         </div>
       </Container>
@@ -68,7 +84,9 @@ const Container = styled.div`
   height: 600px;
   background: #fff;
   margin: 20px;
-
+  .content {
+    height: 100%;
+  }
   .imgBx {
     position: relative;
     display: flex;
@@ -79,7 +97,6 @@ const Container = styled.div`
     background: #212121;
     transition: 0.3s linear;
   }
-
   .imgBx:before {
     content: "";
     position: absolute;
@@ -90,15 +107,20 @@ const Container = styled.div`
     font-size: 8em;
     font-weight: 800;
   }
-
   .imgBx img {
-    height: 100%;
+    height: 80%;
     position: relative;
-    width: 100%;
-    left: -50px;
+    width: auto;
+    overflow: hidden;
     transition: 0.9s linear;
   }
 
+  .imgBx video {
+    height: 80%;
+    position: relative;
+    width: 80%;
+    transition: 0.9s linear;
+  }
   .details {
     display: flex;
     justify-content: center;
@@ -108,32 +130,26 @@ const Container = styled.div`
     box-sizing: border-box;
     padding: 40px;
   }
-
   .details h2 {
     margin: 0;
     padding: 0;
-    font-size: 2.4em;
     line-height: 1em;
     color: #444;
   }
-
   .details h2 span {
     font-size: 0.4em;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #999;
   }
-
   .details p {
     overflow: scroll;
     max-width: 85%;
     height: 150px;
-    margin-left: 15%;
     color: #333;
     font-size: 15px;
     margin-bottom: 36px;
   }
-
   .img-colors span {
     width: 26px;
     height: 26px;
@@ -141,22 +157,17 @@ const Container = styled.div`
     margin-right: 12px;
     left: 10px;
     border-radius: 50%;
-
     display: inline-flex;
   }
-
   .black {
     background: #000;
   }
-
   .red {
     background: #d5212e;
   }
-
   .orange {
     background: #f18557;
   }
-
   .img-colors .active:after {
     content: "";
     width: 36px;
@@ -168,11 +179,9 @@ const Container = styled.div`
     left: -5px;
     top: -5px;
   }
-
   /* responsive */
   @media (max-width: 1080px) {
     height: auto;
-
     .imgBx {
       padding: 40px;
       box-sizing: border-box;

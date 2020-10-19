@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import ToggleButton from "./buttons";
+import ToggleButton from "../buttons";
 import "./Menus.css";
 
 function Menu({ handleSection, ...otherProps }) {
@@ -10,7 +10,7 @@ function Menu({ handleSection, ...otherProps }) {
 
   return (
     <section className="grid-demo">
-      <h2 className="section-title" onClick={() => history.push(`/`, )}>
+      <h2 className="section-title" onClick={() => history.push(`/`)}>
         <span>Image of the Day</span>
       </h2>
       <ToggleButton isOn={viral} onToggle={onToggle} />

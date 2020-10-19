@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Details from "../compoents/Details";
-import Home from "../compoents/Home";
-import Menu from "../compoents/Menu";
+import Details from "../compoents/details/Details";
+import Home from "../compoents/home/Home";
+import Menu from "../compoents/menu/Menu";
 import useToggle from "../hooks/useToggle";
 
 function App() {
