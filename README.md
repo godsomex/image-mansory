@@ -14,3 +14,8 @@ yarn install
 ```javascript
 yarn test
 ```
+
+TODO: 
+  - search component
+  - e2e / complete testing 
+  - improve the styling and code
